@@ -26,4 +26,12 @@ $new = array('Voiture_Chassis' => '1-JDE-544', 'Voiture_Puissance' => 9000, 'Voi
 $newCar = $DAO->insert($new);
 var_dump($newCar);
 
+
+echo "<h2> UPDATE </h2>";
+$up = array('Voiture_Chassis' => '1-JDE-568', 'Voiture_Puissance' => 1, 'Voiture_Couleur' => 'blue');
+// $new2 = array('Voiture_ID' => 1, '1-JDE-544', 'Voiture_Puissance' => 9000, 'Voiture_Couleur' => 'Rouge');
+// $new3 = array('1-JDE-544', 9000, 'Rouge');
+
+$update = $DAO->update(10, $up);
+var_dump($update);
 ?>
