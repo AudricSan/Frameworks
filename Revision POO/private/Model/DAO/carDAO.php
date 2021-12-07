@@ -18,15 +18,14 @@ class carDAO{
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function create ($result) {
+    public function createObject ($result) {
         return new Car(
-            $result['Voiture_ID'],
+            !empty($result['Voiture_ID']) && $result["Voiture_ID"] || 0,
             $result['Voiture_Chassis'],
             $result['Voiture_Puissance'],
             $result['Voiture_Couleur']
         );
     }
-
 
     public function fetch ($id) {
         try {
@@ -36,7 +35,11 @@ class carDAO{
 
             // var_dump($result);
             // var_dump($statement);
-            $car = $this->create($result);
+            $car = $this->createObject($result);
+
+            // echo '<h5> DUMP </h5>';
+            // var_dump($result);
+            // echo "<h5> RESULT </h5>";
             return $car;
 
         } catch (PDOException $e) {
@@ -58,12 +61,57 @@ class carDAO{
             $car = array();
             foreach($result as $value){
                 // var_dump($value);
-                $car[] = $this->create($value);
+                $car[] = $this->createObject($value);
             }
             return $car;
 
         } catch (PDOException $e) {
             var_dump($e);
+        }
+    }
+
+    public function delete ($id){
+        if(!$id){
+            return false;
+        }
+
+        try{
+            $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE id=?");
+            $statement->execute([$id]);
+        }catch (PDOException $e) {
+            var_dump($e->getMessage());
+        }
+    }
+
+    public function insert ($data){
+        if(empty($data['Voiture_Chassis']) && empty($data['Voiture_Puissance']) && empty($data['Voiture_Couleur'])){
+
+            return false;
+        }else {
+            $newCar = $this->createObject($data);
+            // var_dump($newCar);
+            // exit;
+        }
+
+        try {
+            $statement = $this->connection->prepare("INSERT INTO `voiture` (`Voiture_Chassis`, `Voiture_Puissance`, `Voiture_Couleur`) VALUES (?, ?, ?)");
+            $statement->execute([$newCar->serial, $newCar->power, $newCar->color]);
+
+            $newCar->id = $this->connection->lastInsertID();
+            return $newCar;
+        } catch (PDOException $e) {
+            var_dump($e);
+        }
+    }
+
+    public function update ($is, $data){
+        if(empty($data['Voiture_Chassis']) && empty($data['Voiture_Puissance']) && empty($data['Voiture_Couleur'])){
+
+            return false;
+        }else {
+            $newCar = $this->createObject($data);
+            // var_dump($newCar);
+            // exit;
         }
     }
 }
