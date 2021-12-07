@@ -8,7 +8,6 @@ include '../../private/Model/DAO/CarDAO.php';
 include '../../private/Model/Class/seller.php';
 include '../../private/Model/DAO/sellerDAO.php';
 
-
 $peugo106 = new Car(1, '1-HRS-544', 500 ,'red');
 var_dump($peugo106);
 
