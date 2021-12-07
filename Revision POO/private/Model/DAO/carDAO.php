@@ -106,7 +106,7 @@ class carDAO{
                 $statement = $this->connection->prepare("INSERT INTO `voiture` (`Voiture_Chassis`, `Voiture_Puissance`, `Voiture_Couleur`) VALUES (?, ?, ?)");
                 $statement->execute([$newCar->serial, $newCar->power, $newCar->color]);
     
-                $newCar->id = $this->connection->lastInsertID();
+                $newCar->ID = $this->connection->lastInsertID();
                 return $newCar;
             } catch (PDOException $e) {
                 var_dump($e);
