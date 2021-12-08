@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Send Request to Index.php
+rewriteCord %{REQUEST_FILENAME}!-d
+rewriteCord %{REQUEST_FILENAME}!-f
+RewriteRule ^ index.php[L]
