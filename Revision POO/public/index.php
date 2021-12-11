@@ -2,6 +2,10 @@
 
 
 echo '<h1> hello world </h1>';
+
+include '../Model/DAO/interfaceDAO.php';
+include '../Model/DAO/masterDAO.php';
+
 include '../Model/Class/Car.php';
 include '../Model/DAO/CarDAO.php';
 
@@ -14,7 +18,7 @@ var_dump($peugo106);
 $DAO = new carDAO;
 
 echo "<h2> FETCH </h2>";
-$car = $DAO->fetch(1);
+$car = $DAO->fetch("Vendeur_ID", 1);
 var_dump($car);
 
 echo "<h2> FETCH ALL </h2>";
@@ -36,7 +40,7 @@ echo "<h1> SELLER </h1>";
 $DAO2 = new sellerDAO;
 
 echo "<h2> FETCH SELLER </h2>";
-$seller = $DAO2->fetch(1);
+$seller = $DAO2->fetch("Vendeur_ID", 1);
 var_dump($seller);
 
 echo "<h2> FETCH ALL SELLER </h2>";
