@@ -1,5 +1,5 @@
 <?php
-class CarController {
+class CarController implements interfaceController{
     private $dao;
     
     public function __construct () {
@@ -12,7 +12,7 @@ class CarController {
     }
     
     public function show ($id) {
-        $car = $this->dao->fetch($id);
+        $car = $this->dao->fetch("Voiture_ID", $id);
         include('../views/cars/one.php');
     }
     
