@@ -1,5 +1,5 @@
 <?php
-class carDAO{
+class carDAO extends MasterDAO{
 
     // Change the values according to your hosting.
     private $username = "root";     //The login to connect to the DB
@@ -30,69 +30,6 @@ class carDAO{
         );
     }
 
-    public function fetch ($id) {
-        try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE Voiture_ID = ?");
-            $statement->execute([$id]);
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-            // var_dump($result);
-            // var_dump($statement);
-            if (empty($result)){
-                return false;
-            }
-
-            $car = $this->createObject($result);
-
-            // echo '<h5> DUMP </h5>';
-            // var_dump($result);
-            // echo "<h5> RESULT </h5>";
-            return $car;
-
-        } catch (PDOException $e) {
-            var_dump($e);
-        }
-    }
-
-    public function fetchAll () {
-        try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
-            $statement->execute();
-            
-            $result = array();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            // var_dump($result);
-            // var_dump($statement);
-            if (empty($result)){
-                return false;
-            }
-
-            $cars = array();
-            foreach($result as $value){
-                // var_dump($value);
-                $cars[] = $this->createObject($value);
-            }
-            return $cars;
-
-        } catch (PDOException $e) {
-            var_dump($e);
-        }
-    }
-
-    public function delete ($id){
-        if(!$id){
-            return false;
-        }
-
-        try{
-            $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE id=?");
-            $statement->execute([$id]);
-        }catch (PDOException $e) {
-            var_dump($e->getMessage());
-        }
-    }
-
     public function insert ($data){
         if(empty($data['Voiture_Chassis']) && empty($data['Voiture_Puissance']) && empty($data['Voiture_Couleur'])){
             return false;
@@ -117,7 +54,7 @@ class carDAO{
             return false;
         }
 
-        $check = $this->fetch($id);
+        $check = $this->fetch("Voiture_ID", $id);
         if (empty($check)){
             return false;
         }
@@ -126,7 +63,7 @@ class carDAO{
             $statement = $this->connection->prepare("UPDATE voiture SET Voiture_Chassis = ? , Voiture_Puissance = ?, Voiture_Couleur = ? WHERE Voiture_ID = ?");
             $statement->execute([$data["Voiture_Chassis"], $data["Voiture_Puissance"], $data["Voiture_Couleur"], $id]);
             
-            $update = $this->fetch($id);
+            $update = $this->fetch("Voiture_ID", $id);
             return $update;
         } catch (PDOException $e) {
             var_dump($e);
