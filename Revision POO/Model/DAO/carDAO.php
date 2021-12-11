@@ -11,7 +11,6 @@ class carDAO{
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 
     public function __construct () {
-        
         $this->table = "voiture"; // The table to attack => OU CAN EDIT THIS LINE
 
         $this->connection = new PDO("mysql:host={$this->host};dbname={$this->dbname};charset=utf8", $this->username, $this->password, $this->options);;
