@@ -39,7 +39,7 @@ class carDAO extends MasterDAO{
             // exit;
 
             try {
-                $statement = $this->connection->prepare("INSERT INTO `voiture` (`Voiture_Chassis`, `Voiture_Puissance`, `Voiture_Couleur`) VALUES (?, ?, ?)");
+                $statement = $this->connection->prepare("INSERT INTO voiture (Voiture_Chassis, Voiture_Puissance, Voiture_Couleur) VALUES (?, ?, ?)");
                 $statement->execute([$newCar->serial, $newCar->power, $newCar->color]);
     
                 $newCar->ID = $this->connection->lastInsertID();
