@@ -10,6 +10,8 @@ include '../Model/DAO/CarDAO.php';
 include '../Model/Class/seller.php';
 include '../Model/DAO/SellerDAO.php';
 
+//////////////////////////////
+
 echo "<h1> CAR </h1>";
 $DAO = new carDAO;
 
