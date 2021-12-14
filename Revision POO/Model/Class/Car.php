@@ -25,44 +25,7 @@
                 return $this->$prop;
             }  
         }
-
-        /*
-            //SETTER
-            public function setnumber($num){
-                return $this->_serial = $num;
-            }
-
-            public function setcolor($color){
-                return $this->_color = $color;
-            }
-
-            public function setpower($power){
-                return $this->_power = $power;
-            }
-
-            public function setid($ID){
-                return $this->_ID = $ID;
-            }
-
-            //GETTER
-            public function getnumber(){
-                return $this->_serial;
-            }
-
-            public function getcolor(){
-                return $this->_color;
-            }
-
-            public function getpower(){
-                return $this->_power;
-            }
-
-            public function getid(){
-                return $this->_ID;
-            }
-        */
-
+        
         //OTHER
-
     }
 ?>

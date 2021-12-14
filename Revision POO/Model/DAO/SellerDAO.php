@@ -1,5 +1,5 @@
 <?php
-class sellerDAO{
+class sellerDAO extends MasterDAO{
 
     // Change the values according to your hosting.
     private $username = "root";     //The login to connect to the DB
@@ -30,74 +30,8 @@ class sellerDAO{
         );
     }
 
-    public function fetch ($id) {
-        try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE Vendeur_ID = ?");
-            $statement->execute([$id]);
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-            // var_dump($result);
-            // var_dump($statement);
-            if (empty($result)){
-                return false;
-            }
-
-            $seller = $this->createObject($result);
-
-            // echo '<h5> DUMP </h5>';
-            // var_dump($result);
-            // echo "<h5> RESULT </h5>";
-            return $seller;
-
-        } catch (PDOException $e) {
-            var_dump($e);
-        }
-    }
-
-    public function fetchAll () {
-        try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
-            $statement->execute();
-            
-            $result = array();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            // var_dump($result);
-            // var_dump($statement);
-            if (empty($result)){
-                return false;
-            }
-
-            $sellers = array();
-            foreach($result as $value){
-                // var_dump($value);
-                $sellers[] = $this->createObject($value);
-            }
-            
-            return $sellers;
-
-        } catch (PDOException $e) {
-            var_dump($e);
-        }
-    }
-
-    public function delete ($id){
-        if(!$id){
-            return false;
-        }
-
-        try{
-            $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE id=?");
-            $statement->execute([$id]);
-        }catch (PDOException $e) {
-            var_dump($e);
-        }
-    }
-
-
-    // I WAS HHERE //
     public function insert ($data){
-        if(empty($data['Vendeur_Name']) && empty($data['Vendeur_FisrtName']) && empty($data['Vendeur_Bday'])){
+        if(empty($data['Vendeur_Name']) || empty($data['Vendeur_FisrtName']) || empty($data['Vendeur_Bday'])){
             return false;
         }
 
@@ -115,11 +49,11 @@ class sellerDAO{
     }
 
     public function update ($id, $data){
-        if(empty($id) && empty($data['Vendeur_Name']) && empty($data['Vendeur_FirstName']) && empty($data['Vendeur_Bday'])){
+        if(empty($id) || empty($data['Vendeur_Name']) || empty($data['Vendeur_FirstName']) || empty($data['Vendeur_Bday'])){
             return false;
         }
 
-        $check = $this->fetch($id);
+        $check = $this->fetch("Vendeur_ID", $id);
         if (empty($check)){
             return false;
         }
@@ -128,7 +62,7 @@ class sellerDAO{
             $statement = $this->connection->prepare("UPDATE vendeur SET Vendeur_Name = ? , Vendeur_FirstName = ?, Vendeur_Bday = ? WHERE Vendeur_ID = ?");
             $statement->execute([$data["Vendeur_Name"], $data["Vendeur_FirstName"], $data["Vendeur_Bday"], $id]);
             
-            $update = $this->fetch($id);
+            $update = $this->fetch("Vendeur_ID", $id);
             return $update;
         } catch (PDOException $e) {
             var_dump($e);
