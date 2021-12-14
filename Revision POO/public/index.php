@@ -1,6 +1,4 @@
 <?php
-
-
 echo '<h1> hello world </h1>';
 
 include '../Model/DAO/interfaceDAO.php';
@@ -12,9 +10,7 @@ include '../Model/DAO/CarDAO.php';
 include '../Model/Class/seller.php';
 include '../Model/DAO/SellerDAO.php';
 
-$peugo106 = new Car(1, '1-HRS-544', 500 ,'red');
-var_dump($peugo106);
-
+echo "<h1> CAR </h1>";
 $DAO = new carDAO;
 
 echo "<h2> FETCH </h2>";
