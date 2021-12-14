@@ -7,21 +7,27 @@ class sellerController implements interfaceController{
     }
     
     public function index () {
-        $cars = $this->dao->fetchAll();
-        include('../views/cars/list.php');
+        $seller = $this->dao->fetchAll();
+        include('../public/seller/list.php');
     }
     
     public function show ($id) {
-        $car = $this->dao->fetch("Vendeur_ID", $id);
-        include('../views/cars/one.php');
+        $seller = $this->dao->fetch("Vendeur_ID", $id);
+        include('../public/seller/one.php');
     }
     
     public function create () {
-        include('../views/cars/form.php');
+        include('../public/seller/form.php');
     }
     
     public function insert($data) {
         $this->dao->insert($data);
+    }
+
+    public function update($id) {
+        $seller = $this->dao->fetch("Vendeur_ID", $id);
+        include('../public/seller/form.php');
+
     }
 }
 ?>
