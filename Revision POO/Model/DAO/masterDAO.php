@@ -2,7 +2,10 @@
 
 class MasterDAO implements interfaceDAO{
 
-    public function createObject ($result){}
+    public function createObject ($result){
+        // ATTENTION CETTE CLASSE N'IMPLEMENTE PAS LA METHODE
+        echo 'NOT IMPLEMENTED';
+    }
 
     public function fetch ($search ,$id) {
         try {
@@ -59,6 +62,12 @@ class MasterDAO implements interfaceDAO{
         }
     }
 
-    public function insert($data){}
-    public function update($id, $data){}
+    public function insert($data){
+        // ATTENTION CETTE CLASSE N'IMPLEMENTE PAS LA METHODE
+        echo 'NOT IMPLEMENTED';
+    }
+    public function update($id, $data){
+        // ATTENTION CETTE CLASSE N'IMPLEMENTE PAS LA METHODE
+        echo 'NOT IMPLEMENTED';
+    }
 }
