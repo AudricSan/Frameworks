@@ -35,8 +35,9 @@ $up = array('Voiture_Chassis' => '1-JDE-568', 'Voiture_Puissance' => 1, 'Voiture
 $update = $DAO->update(10, $up);
 var_dump($update);
 
-echo "<h1> SELLER </h1>";
+//////////////////////////////
 
+echo "<h1> SELLER </h1>";
 $DAO2 = new sellerDAO;
 
 echo "<h2> FETCH SELLER </h2>";
@@ -56,5 +57,4 @@ echo "<h2> UPDATE SELLER </h2>";
 $up = array('Vendeur_Name' => 'Audric', 'Vendeur_FirstName' => 'Rosier', 'Vendeur_Bday' => '2021-12-24');
 $update = $DAO2->update(2, $up);
 var_dump($update);
-
 ?>
