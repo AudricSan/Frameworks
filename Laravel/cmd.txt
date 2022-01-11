@@ -1,0 +1,3 @@
+Launch Server => php artisan serve
+Migration DB => php artisan migrate
+Create Model / COntroler => >php make artisan make : model <<NAME>> -mc

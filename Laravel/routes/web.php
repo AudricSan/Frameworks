@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,3 +55,7 @@ Route::get('/profile', function () {
 
     return view('profile', ['users' => $user]);
 });
+
+Route::get('/cars', [CarController::class, 'index']);
+Route::get('/cars/create', [CarController::class, 'create']);
+Route::post('/cars/create', [CarController::class, 'insert']);
