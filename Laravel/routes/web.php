@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
+//notiffier le routeur qu'il nous faut le controlleur
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\SellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,44 +20,37 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/coucou', function () {
-    return view('coucou', ['name' => 'Audric']);
+Route::get('/vue', function () {
+    return view('vue1');
 });
 
 Route::get('/myprofile', function () {
-
-    $user = [
-        [
-            'name' => 'Audric',
-            'age' => 23
-        ],
-    
-        [
-            'name' => 'coucou',
-            'age' => 22
-        ]
-    ];
-
-    return view('myprofile', ["users" => $user]);
+    return view('vue2', ['nom'=>'RACQUEZ', 'prenom'=>'Ronald', 'age'=>20]);
 });
 
-Route::get('/profile', function () {
-
+Route::get('/profiles', function () {
     $user = [
-        'user1' =>[
-            'name' => 'Audric',
-            'age' => 23
-        ],
-    
-        'user2' =>[
-            'name' => 'coucou',
-            'age' => 2
-        ]
+        ['nom'=>'RACQUEZ', 'prenom' => 'Ronald', 'Age' => 20],
+        ['nom'=>'TRUC', 'prenom'=>'Mush', 'age'=>22],
+        ['nom'=>'BAZARD', 'prenom'=>'Brol', 'age'=>22]
     ];
 
-    return view('profile', ['users' => $user]);
+    return view('vue3', ['users' => $user]);
 });
 
-Route::get('/cars', [CarController::class, 'index']);
-Route::get('/cars/create', [CarController::class, 'create']);
-Route::post('/cars/create', [CarController::class, 'insert']);
+Route::get('/cars',[CarController::class, 'index']);
+//Va appeler carController->index
+
+Route::get('/sellers',[SellerController::class, 'index']);
+
+Route::get('/cars/form',function () {
+    return view('cars.formulaire');
+});
+
+Route::post('/cars/insert',[CarController::class, 'insert']);
+
+Route::get('/sellers/form',function () {
+    return view('sellers.formSeller');
+});
+
+Route::post('/sellers/insert',[SellerController::class, 'insert']);

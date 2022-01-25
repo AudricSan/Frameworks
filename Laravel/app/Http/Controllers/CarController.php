@@ -7,24 +7,25 @@ use App\Models\Car;
 
 class CarController extends Controller
 {
-    public function index()
-    {
-        $cars = Car::all();
-        return view('cars.list', ['cars' => $cars]);
+    public function index(){
+        $cars = Car::all(); //recupere toutes nos voitures
+        return view('cars.list', ['cars'=>$cars]);
+        // On renvoie le vue cars.list avec la variable cars qui contient nos voitures
     }
 
-    public function create()
-    {
-        return view('cars.create');
-    }
+    public function insert(){
 
-    public function insert(Request $request)
-    {
-        //$request->serial;
-        //creer un nouvel objet
-        //assigner les valeurs
-        //utiliser la methode save()
-        //$car->save()
-        $serialError = $powerError = $colorError = "";
+        $ser = $_POST["serial"];
+        $col = $_POST["color"];
+        $pow = $_POST["power"];
+
+        $carpush = new Car();
+        $carpush->serial = $ser;
+        $carpush->color = $col;
+        $carpush->power = $pow;
+
+        $carpush->save();
+
+        return view('cars.formulaire');
     }
 }
