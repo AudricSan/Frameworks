@@ -28,8 +28,4 @@ class SellerController extends Controller
 
         return view('sellers.formSeller');
     }
-
 }
-
-
-?>

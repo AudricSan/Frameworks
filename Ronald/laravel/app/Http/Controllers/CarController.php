@@ -28,5 +28,4 @@ class CarController extends Controller
 
         return view('cars.formulaire');
     }
-
 }
