@@ -14,7 +14,7 @@ class ColorController extends Controller
      */
     public function index()
     {
-        //
+        return view('color.list');
     }
 
     /**
@@ -24,7 +24,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        //
+        return view('color.form');
     }
 
     /**
@@ -35,7 +35,12 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $color = new color;
+        $color->name = $request->has('name') && strlen($request->name) ? $request->name : 'Non Specified';
+        $color->hex = $request->has('hex') && strlen($request->hex) ? $request->hex : '#000';
+        $color->save();
+
+        return redirect('/color/' . $color->id);
     }
 
     /**
@@ -46,7 +51,7 @@ class ColorController extends Controller
      */
     public function show(Color $color)
     {
-        //
+        return view('color.one', ['color' => $color]);
     }
 
     /**
@@ -57,7 +62,7 @@ class ColorController extends Controller
      */
     public function edit(Color $color)
     {
-        //
+        return view('color.form', ['color' => $color]);
     }
 
     /**
@@ -69,7 +74,11 @@ class ColorController extends Controller
      */
     public function update(Request $request, Color $color)
     {
-        //
+        $color->name = $request->has('name') && strlen($request->name) ? $request->name : $color->name;
+        $color->hex = $request->has('hex') && strlen($request->hex) ? $request->hex : $color->hex; 
+        $color->save();
+
+        return redirect('/color/' . $color->id);
     }
 
     /**
@@ -80,6 +89,7 @@ class ColorController extends Controller
      */
     public function destroy(Color $color)
     {
-        //
+        $color->delete();
+        return redirect('/color');
     }
 }
